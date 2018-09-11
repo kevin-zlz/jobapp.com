@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-2.1.1.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+    <div class="top">
+        <div class="login_no" id="nologin">
+            <ul>
+                <li><a href="pages/login.html">登录 &nbsp|</a></li>
+                <li><a href="pages/regist.html">注册</a></li>
+            </ul>
+        </div>
+        <div class="login_yes" id="yeslogin">
+            <ul>
+                <li><a href="#">消息 &nbsp| &nbsp</a></li>
+                <li><a id="jianli" href="#">我的简历 &nbsp|&nbsp</a></li>
+                <li><a href="#">投递箱 &nbsp|&nbsp</a></li>
+                <li><a href="#">收藏夹 &nbsp|&nbsp</a></li>
+                <li><a href="javascript:void 0" id="username"></a>
+                    <ul>
+                        <li><a href="javascript:void 0" id="tuichu"> 退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div >
+    </div>
+    <div class="nav">
+
+    </div>
+    <div class="search">
+        <div>
+            <input type="text" id="search">
+            <input type="button" value="搜索" id="btnSearch">
+        </div>
+    </div>
+    <div class="condition">
+        <div class="xueli" id="xueli">
+            <span>学历要求:</span>
+            <span id="xueli_neirong">
+                <a href="javascript:void 0">不限</a>
+                <a href="javascript:void 0">大专</a>
+                <a href="javascript:void 0">本科</a>
+                <a href="javascript:void 0">硕士</a>
+                <a href="javascript:void 0">博士</a>
+                <a href="javascript:void 0">不要求</a>
+            </span>
+
+        </div>
+        <div class="hangye" id="hangye">
+            <span>行业领域:</span>
+            <span id="hangye_neirong" >
+                <a href="javascript:void 0" id="0">不限</a>
+            </span>
+        </div>
+        <div class="paixu" id="paixu">
+            <span>排序方式:</span>
+            <span id="paixu_neirong">
+                <a href="javascript:void 0">默认</a>
+                <a href="javascript:void 0">最新</a>
+            </span>
+        </div>
+    </div>
+    <div class="main" id="job_mian">
+        <!--<div class="job-item">-->
+            <!--<div class="job-item-top">-->
+                <!--<div class="job-item-top-left">-->
+                    <!--<span style="color: #00b38a">测试工程师【苏州】 1天前发布</span> <br>-->
+                    <!--<span style="color: red">6k-8k</span> 经验1-3年/ 本科-->
+                <!--</div>-->
+                <!--<div class="job-item-top-center">-->
+                    <!--<span style="color: #00b38a">菜鸟网络</span> <br>-->
+                    <!--企业服务/成长型-->
+                <!--</div>-->
+                <!--<div class="job-item-top-right">-->
+                    <!--icon-->
+                <!--</div>-->
+            <!--</div>-->
+            <!--<div class="job-item-bottom">-->
+                <!--<div class="job-item-bottom-left">-->
+                    <!--<button>web</button>-->
+                    <!--<button>脚本</button>-->
+                <!--</div>-->
+                <!--<div class="job-item-bottom-right">bb</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    </div>
+    <div class="link" id="link">
+        <button id="down">下一页</button>
+        <span class="link-page-index" id="lin-page-index">
+            <!--<a href="javascript:void 0">1</a>-->
+        </span>
+        <button id="up">上一页</button>
+    </div>
+    <script src="js/utils.js"></script>
+    <script type="text/javascript">
+        var conditions={
+            "search":"",
+            "index":1,
+            "order_like":"desc",
+            "profession_name":"",
+            "education_name":""
+        }
+        var pageSize=5;
+        var pageCount=0;
+        var all_positions=null;
+        let positions_container=document.querySelector('#job_mian');
+        let pageBtn_container=document.querySelector('#lin-page-index');
+        let neirong=document.querySelector('#hangye_neirong');
+        let hangye=document.querySelector('#hangye');
+        let search_btn=document.querySelector('#btnSearch');
+        let search_input=document.querySelector('#search');
+        let education_span=document.querySelector('#xueli_neirong');
+        let up_page=document.querySelector('#up');
+        let down_page=document.querySelector('#down');
+        let jianli=document.querySelector('#jianli');
+        let job_mian=document.querySelector('#job_mian');
+        window.onload=function(){
+            //展示行业名称
+            show_professs();
+            //修改行业选择样式
+            hangye.onclick=function (event) {
+                profession_names=hangye.querySelectorAll('a');
+                for(let i of profession_names){
+                    i.style.backgroundColor='ghostwhite';
+                    i.style.color='black';
+                }
+                profession_name=event.target;
+                profession_name.style.backgroundColor='green';
+                profession_name.style.color='white';
+                if(profession_name.innerText.trim()!='不限'){
+                    conditions.index=1;
+                    conditions.profession_name=profession_name.innerText.trim();
+                    queryPositionsByCondition(all_positions);
+                }else{
+                    conditions.index=1;
+                    conditions.profession_name="";
+                    queryPositionsByCondition(all_positions);
+                }
+
+            }
+            //加载所有职位信息
+            queryAllPositions(conditions);
+            //设置页码的点击事件
+            pageBtn_container.onclick=function (event){
+                conditions.index=parseInt(event.target.innerText);
+                // conditions.profession_name="";
+                let pageBtns=pageBtn_container.querySelectorAll('a');
+                for(let i of pageBtns){
+                    i.style.color='ghostwhite';
+                }
+                event.target.style.color='yellow';
+                queryPositionsByCondition(all_positions);
+            }
+            //设置搜索点击事件
+            search_btn.onclick=function (event) {
+                conditions.search=search_input.value;
+                conditions.index=1;
+                conditions.profession_name="";
+                conditions.education_name="";
+                //设置行业默认选项
+                profession_names=hangye.querySelectorAll('a');
+                for(let i of profession_names){
+                    i.style.backgroundColor='ghostwhite';
+                    i.style.color='black';
+                }
+                profession_name=neirong.querySelector('a:first-child');
+                profession_name.style.backgroundColor='green';
+                profession_name.style.color='white';
+                //设置学历默认选项
+                education_names=education_span.querySelectorAll('a');
+                for(let i of education_names){
+                    i.style.backgroundColor='ghostwhite';
+                    i.style.color='black';
+                }
+                education_name=education_span.querySelector('a:first-child');
+                education_name.style.backgroundColor='green';
+                education_name.style.color='white';
+                queryAllPositions(conditions);
+            }
+            //设置学历点击事件
+            education_span.onclick=function (event) {
+                education_names=education_span.querySelectorAll('a');
+                for(let i of education_names){
+                    i.style.backgroundColor='ghostwhite';
+                    i.style.color='black';
+                }
+                education_name=event.target;
+                education_name.style.backgroundColor='green';
+                education_name.style.color='white';
+                if(education_name.innerText.trim()!='不限'){
+                    conditions.index=1;
+                    conditions.education_name=education_name.innerText.trim();
+                    queryPositionsByCondition(all_positions);
+                }else{
+                    conditions.index=1;
+                    conditions.education_name="";
+                    queryPositionsByCondition(all_positions);
+                }
+            }
+            //设置上一页点击事件
+            up_page.onclick=function () {
+                if(conditions.index>1){
+                    conditions.index--;
+                    queryPositionsByCondition(all_positions);
+                }
+            }
+            //下一页点击事件
+            down_page.onclick=function () {
+                if(conditions.index<pageCount){
+                    down_page.style.opacity='1';
+                    conditions.index++;
+                    queryPositionsByCondition(all_positions);
+                }else{
+                    down_page.style.opacity='0.5';
+                }
+            }
+            //点击我的简历
+            jianli.onclick=function () {
+
+                tel=sessionStorage.getItem('tel');
+                if(tel){
+                    location.href='pages/jianli.html';
+                }else{
+                    sessionStorage.setItem('from','jianli.html');
+                    location.href='pages/login.html';
+                }
+            }
+            //设置招聘信息的点击事件
+            job_mian.onclick=function (event) {
+                if(event.target.className=='job-link'){
+                    sessionStorage.setItem('jobId',event.target.id);
+                    location.href="pages/job.html";
+                }
+            }
+
+        }
+        function show_professs(){
+            ajax('GET','http://127.0.0.1:8080/search/searchprofession',null,null,function(res){3
+                for(let i of res){
+                    neirong.innerHTML+=`
+                        <a href="javascript:void 0">${i.name}</a>
+                        `;
+                }
+            })
+        }
+        function queryAllPositions(condition) {
+            if(condition.search==''){
+                ajax('GET','http://127.0.0.1:8080/search/searchallposition',null,null,function(res){
+                    all_positions=res;
+                    //展示当前按钮页数
+                    queryPositionsByCondition(all_positions);
+                })
+            }else{
+                ajax('GET','http://127.0.0.1:8080/search/search',{"search":conditions.search},null,function(res){
+                    all_positions=res;
+                    queryPositionsByCondition(all_positions);
+                })
+            }
+        }
+        function queryPositionsByCondition(positions){
+            var temp_positions=[];
+            if(conditions.profession_name!="" && conditions.education_name!=""){
+                for(let t of positions){
+                    if(t.profession_name==conditions.profession_name && conditions.education_name==t.education){
+                        temp_positions.push(t);
+                    }
+                }
+            }else if(conditions.profession_name!="" || conditions.education_name!=""){
+                for(let t of positions){
+                    if(t.profession_name==conditions.profession_name || conditions.education_name==t.education){
+                        temp_positions.push(t);
+                    }
+                }
+            }else{
+                temp_positions=all_positions;
+            }
+            console.log(temp_positions);
+            showPageCount(temp_positions);
+            showCurrentPage(temp_positions);
+        }
+        function showPageCount(position) {
+            pageCount=Math.ceil(position.length/pageSize);
+            pageBtn_container.innerHTML="";
+            for(let i=1;i<=pageCount;i++){
+                pageBtn_container.innerHTML+=`<a href="javascript:void 0">${i}</a>`;
+            }
+        }
+        function showCurrentPage(positions){
+            let start=(conditions.index-1)*pageSize;
+            let end=positions.length>pageSize?conditions.index*pageSize-1:positions.length-1;
+            console.log(end)
+            positions_container.innerHTML="";
+            for(let i=start;i<=end; i++){
+                positions_container.innerHTML+=`
+            <div class="job-item">
+            <div class="job-item-top">
+                <div class="job-item-top-left">
+                    <span class="job-link" id="${positions[i].id}" style="color: #00b38a">${positions[i].name}【${positions[i].city_name}】 1天前发布</span> <br>
+                    <span style="color: red">${positions[i].salary}</span> ${positions[i].years_working}/ ${positions[i].education}
+                </div>
+                <div class="job-item-top-center">
+                    <span style="color: #00b38a">${positions[i].company_name}</span> <br>
+                    ${positions[i].profession_name}
+                </div>
+                <div class="job-item-top-right">
+                    icon
+                </div>
+            </div>
+            <div class="job-item-bottom">
+                <div class="job-item-bottom-left">
+                    <button>web</button>
+                    <button>脚本</button>
+                </div>
+                <div class="job-item-bottom-right">bb</div>
+            </div>
+        </div>
+                        `;
+
+            };
+        }
+
+    </script>
+</body>
+</html>

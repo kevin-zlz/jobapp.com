@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.top{
+    width: 100%;
+    height: 30px;
+    background: black;
+}
+
+.top .login_no,.top .login_yes{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    right: 10px;
+    line-height: 30px;
+    display: none;
+}
+
+.top .login_yes{
+    display: block;
+    width: 30%;
+}
+.top .login_yes ul li ul li a{
+    visibility: hidden;
+
+}
+.top .login_yes ul li:hover ul li a{
+    visibility: visible;
+    background: black;
+    width: 70px;
+    text-align: center;
+    display: block;
+
+}
+
+
+.top ul li { list-style: none; float: left;}
+.top ul li a{ color: white; text-decoration: none;}
+
+
+
+*{ margin: 0px; padding: 0px;}
+
+.nav {
+    width: 100%;
+    height:30px;
+    background-color: #333333;
+}
+
+
+.logo {
+    width: 100%;
+    height:40px;
+    background-color:#ffffff;
+}
+
+.logo ul li  { list-style: none; float: left;  }
+
+.logo ul {  width: 200px; height: 40px;  margin-left: 230px;}
+
+.logo ul li a { display: block; color: #999999; margin-left: 50px; font-size:18px; text-decoration: none; margin-top: 10px; }
+
+
+.jobname { width:100%; height:190px; background-color: #dceeec;}
+
+.jobname .jobname_box { width:1000px; height:160px; margin:auto;}
+
+.jobname .jobname_box .jobname_left { width:700px; height:160px;float:left;}
+
+.jobname .jobname_box .jobname_left ul { margin-left:90px; margin-top:20px;}
+
+.jobname .jobname_box .jobname_left ul li { list-style-type:none; margin-top: 10px; color: #4d5c5a;
+    font-family: "幼圆";}
+
+.jobname .jobname_box .jobname_left ul li:first-child { font-size: 34px;  color: black;;
+    font-weight: bolder;}
+
+.jobname .jobname_box .jobname_left ul li span { color: red; }
+
+.jobname .jobname_box .jobname_right { width:300px; height:160px; float:right;}
+
+.jobname .jobname_box .jobname_right button { width: 160px; height: 50px; background-color: #00b38a;
+    border: 0; border-radius: 5px; position: relative; left: 30px; top: 50px; color: white;
+    font-family: "幼圆"; font-size: 20px;}
+
+
+
+.jobinfo { width: 100%;  height: 400px; margin-top: 50px;color: grey;font-size: 0.8em}
+
+.jobinfo .jobinfo_box { width: 1000px; height: 400px;  margin: auto;  }
+
+.jobinfo .jobinfo_box .jobinfo_left { width: 700px; height: 400px;
+    float: left; font-family: "幼圆"; }
+
+.jobinfo .jobinfo_box .jobinfo_left h3:first-child { padding-top: 30px;}
+
+.jobinfo .jobinfo_box .jobinfo_left h3,p ,ol{ margin-top: 15px; margin-left: 90px; }
+
+.jobinfo .jobinfo_box .jobinfo_left ol li {  margin-bottom: 10px; font-size: 12px; }
+
+.jobinfo .jobinfo_box .jobinfo_right { width: 298px; height: 400px; background-color: white;
+    float: right; border-left: 2px solid #99a9a7;}
+
+.jobinfo .jobinfo_box .jobinfo_right p { margin-left: 30px; color: #445755; font-size: 12px;}
+
+.jobinfo .jobinfo_box .jobinfo_right img { position: relative; top: 12px;}
+
+.jianli { position: absolute; left:430px; z-index:1;
+    width: 450px; height: 300px; background-color:#666;
+    margin: auto; margin-top: 280px;display: none}
+
+.jianli .jianli_top { width:450px; height:40px; background-color:#00b38a;  font-family: "幼圆";}
+
+.jianli .jianli_top img { position:relative; left:280px; top:5px;}
+
+.jianli .jianli_top span { display:block; color:#FFF; font-weight:bolder; margin-left:20px; font-size:18px; width:100px; height:40px; line-height:40px; float:left;}
+
+.jianli .jianli_bottom { width:350px; height:200px; background-color:#CC9; margin:auto; font-family: "幼圆"; margin-top:50px;}
+
+.jianli .jianli_bottom ul li { list-style-type:none; margin-bottom:15px; position:relative;}
+
+.jianli .jianli_bottom ul li a { color:#666; font-weight:bold; position:absolute; right:20px;}
+
+.jianli .jianli_bottom #btn { width:150px; height:40px; color:#FFF; background-color:#666; border:none; position:relative; left:100px; top:30px; font-size:20px;}
+

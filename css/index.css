@@ -1,0 +1,182 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.top{
+    width: 100%;
+    height: 30px;
+    background: black;
+}
+
+.top .login_no,.top .login_yes{
+     height: 30px;
+     width: 200px;
+     position: absolute;
+     right: 10px;
+     line-height: 30px;
+     display: none;
+ }
+
+.top .login_yes{
+    display: block;
+    width: 30%;
+}
+.top .login_yes ul li ul li a{
+    visibility: hidden;
+
+}
+.top .login_yes ul li:hover ul li a{
+    visibility: visible;
+    background: black;
+    width: 70px;
+    text-align: center;
+    display: block;
+
+}
+
+
+.top ul li { list-style: none; float: left;}
+.top ul li a{ color: white; text-decoration: none;}
+
+
+.nav{
+    width: 100%;
+    height: 60px;
+    background: grey;
+}
+
+.search{
+    width: 100%;
+    height: 100px;
+    background: gainsboro;
+    padding-top: 35px;
+    box-sizing: border-box;
+}
+.search div{
+    width: 50%;
+    height: 30px;
+    margin: auto;
+
+
+}
+
+.search div #search{
+    width: 360px;
+    height: 30px;
+}
+
+.search div #btnSearch{
+    width: 120px;
+    height: 30px;
+    background: green;
+    color: white;
+    border: none;
+}
+
+.condition{
+    width: 80%;
+    height: 200px;
+    margin: 0 auto;
+    background: gainsboro;
+    margin-top: 50px;
+}
+.condition>div{
+    margin-top: 20px;
+    background: ghostwhite;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.condition div a{
+    text-decoration: none;
+    color: black;
+    padding: 5px;
+    margin-top: 5px;
+    display: inline-block;
+}
+
+.condition div span a:first-child{
+    background: green;
+    color: white;
+}
+.condition  span:first-child{
+    font-weight: 700;
+}
+/*职位列表*/
+.main{
+    width: 80%;
+    margin: 0 auto;
+    margin-top: 50px;
+    color: grey;
+    padding: 10px;
+}
+
+/*职位列表项*/
+.main .job-item{
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: solid 1px gainsboro;
+    margin: 10px;
+}
+
+.main .job-item .job-item-top,.main .job-item-bottom{
+    display: flex;
+    flex-direction: row;
+}
+
+.main .job-item .job-item-top .job-item-top-left{
+    flex: 4;
+}
+.main .job-item .job-item-top .job-item-top-left span:first-child:hover{
+    cursor: pointer;
+}
+.main .job-item .job-item-top .job-item-top-center{
+    flex: 3;
+}
+
+.main .job-item .job-item-top .job-item-top-right{
+    flex: 1;
+}
+
+.main .job-item-bottom .job-item-bottom-left{
+    flex: 4;
+}
+
+.main .job-item-bottom .job-item-bottom-right{
+    flex: 4;
+}
+
+
+/*页码部分*/
+
+.link{
+    width: 80%;
+    height: 50px;
+    margin: auto;
+    text-align: center;
+}
+
+.link button{
+    margin: 10px;
+    border: solid 1px grey;
+    background: white;
+    width: 60px;
+    height: 30px;
+}
+
+.link span a{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-decoration: none;
+    color: grey;
+    text-align: center;
+    line-height: 30px;
+    /*background: #00d100;*/
+
+
+}
+

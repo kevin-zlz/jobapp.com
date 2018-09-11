@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>岗位详情页</title>
+    <link rel="stylesheet" href="../css/job.css">
+    <script src="../js/jquery-2.1.1.js"></script>
+
+</head>
+
+<body>
+<div class="jianli" id="jianli">
+	<div class="jianli_top">
+    	<span>投个简历</span>
+    	<img src="../images/关闭.png" />
+    </div>
+    
+    <div class="jianli_bottom">
+    	<ul >
+            <li style="font-weight:bold;">请选择你要投出去的简历：</li>
+            <span id="jianli_liebiao">
+
+            </span>
+            <li><input type="button" id="btn" value="请选择简历" disabled="disabled"/></li>
+        </ul>
+    </div>
+</div>
+
+<div class="nav">
+    <div class="top">
+        <div class="login_no" id="nologin">
+            <ul>
+                <li><a href="login.html">登录 &nbsp|</a></li>
+                <li><a href="regist.html">注册</a></li>
+            </ul>
+        </div>
+        <div class="login_yes" id="yeslogin">
+            <ul>
+                <li><a href="#">消息 &nbsp| &nbsp</a></li>
+                <li><a id="jianli" href="jianli.html">我的简历 &nbsp|&nbsp</a></li>
+                <li><a href="#">投递箱 &nbsp|&nbsp</a></li>
+                <li><a href="#">收藏夹 &nbsp|&nbsp</a></li>
+                <li><a href="javascript:void 0" id="username"></a>
+                    <ul>
+                        <li><a href="javascript:void 0" id="tuichu"> 退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div >
+    </div>
+</div>
+
+<div class="logo">
+    <ul>
+        <li><img src="../images/logo01.jpg"/></li>
+        <li><a href="">首页</a></li>
+    </ul>
+</div>
+
+<div class="jobname">
+	<div class="jobname_box">
+        <div class="jobname_left">
+        	<ul>
+            	<li id="job_name">测试工程师</li>
+
+                <li id="job_level">中级&nbsp;测试</li>
+                <li id="job_publish_time"></li>
+                <li id="job_info"></li>
+            </ul>
+        
+        </div>
+    
+        <div class="jobname_right">
+        	<button id="btn_apply">投个简历</button>
+        </div>
+    </div>
+</div>
+<div class="jobinfo">
+    <div class="jobinfo_box">
+        <div class="jobinfo_left">
+
+        </div>
+
+        <div class="jobinfo_right">
+            <p>
+                <img src="../images/公司logo.png" height="68" width="67"/>
+                <span style="font-size: 16px; position: relative; top: 6px;" id="company_name">家乐淘</span><img src="../images/认证图标.png" height="25" width="22"/></p>
+            <p>
+                <img src="../images/职位详情图标1.png" height="30" width="31"/>
+                <span id="profession_name">电子商务，生活服务</span>
+            </p>
+            <p><img src="../images/职位详情图标2.png" height="30" width="31"/>
+                <span id="company_stage">未融资</span>
+            </p>
+            <p><img src="../images/职位详情图标3.png" height="30" width="31"/>
+                <span id="company_acount">150-500</span>
+            </p>
+
+        </div>
+
+    </div>
+</div>
+<script src="../js/utils.js"></script>
+<script type="text/javascript">
+    let jobId;
+    var position=null;
+    let job_name=document.querySelector('#job_name');
+    let job_info=document.querySelector('#job_info');
+    let company_name=document.querySelector('#company_name');
+    let profession_name=document.querySelector('#profession_name');
+    let company_stage=document.querySelector('#company_stage');
+    let job_publish_time=document.querySelector('#job_publish_time');
+    let company_acount=document.querySelector('#company_acount');
+    let job_level=document.querySelector('#job_level');
+    let jianli=document.querySelector('#jianli');
+    window.onload=function () {
+        jobId=sessionStorage.getItem('jobId');
+        //加载岗位详情信息
+        loadPositionDetile(jobId);
+        //点击我的简历
+        jianli.onclick=function () {
+            alert('1111')
+            tel=sessionStorage.getItem('tel');
+            if(tel){
+                location.href='pages/jianli.html';
+            }else{
+                sessionStorage.setItem('from','jianli.html');
+                location.href='pages/login.html';
+            }
+        }
+
+    }
+    function loadPositionDetile(jobId) {
+        ajax("POST",'http://127.0.0.1:8080/search/querypositiondetile',{"pid":jobId},null,function (result) {
+            position=result;
+            job_name.innerText=position[0]['name'];
+            job_info.innerHTML=position[0]['description'];
+            job_publish_time.innerHTML=position[0]['publish_date'];
+            company_name.innerHTML=position[0]['company'][0]['name'];
+            company_stage.innerHTML=position[0]['company'][0]['stage'];
+            company_acount.innerHTML=position[0]['company'][0]['account'];
+            company_name.innerHTML=position[0]['company'][0]['name'];
+            job_level.innerHTML=position[0]['tags'];
+        })
+    }
+</script>
+</body>
+</html>
+<script type="text/javascript" src="../js/jquery-2.1.1.js"></script>
+<!--<script>-->
+    <!--var _job_id;-->
+    <!--window.onload=function ()-->
+	<!--{-->
+        <!--var _name=window.sessionStorage.getItem('loginname');-->
+        <!--var _job=JSON.parse(window.sessionStorage.getItem('job'));-->
+
+
+<!--//        判断是否登录-->
+        <!--if(_name){-->
+            <!--document.getElementById('nologin').style.display='none';-->
+            <!--document.getElementById('yeslogin').style.display='block';-->
+            <!--document.getElementById('username').innerHTML=_name-->
+
+        <!--}else{-->
+<!--//            location.href='../2-login/login.html';-->
+        <!--}-->
+
+        <!--document.getElementById("tuichu").onclick=function()-->
+        <!--{-->
+            <!--window.sessionStorage.removeItem('loginname');-->
+            <!--location.reload();-->
+        <!--};-->
+
+
+<!--//        判断是否投递简历-->
+
+
+        <!--//                获取简历列表-->
+        <!--_job_id=_job.id;-->
+        <!--$.ajax({-->
+            <!--url:'http://localhost:3000/resume/getallresumes',-->
+            <!--type:'get',-->
+            <!--data:{'telephone':_name},-->
+            <!--dataType:'text',-->
+            <!--success:function (data) {-->
+                <!--var data=JSON.parse(data);-->
+                <!--for(var i=0;i<data.length;i++){-->
+                    <!--$('#jianli_liebiao').append(-->
+                        <!--` <li style="font-size:14px;">-->
+            	<!--<input type="radio" id="rdo_chinese" value="${data[i].id}" name="radio1"/>在线简历：<b>${data[i].resume_title}</b>-->
+            	<!--<a href="javascript:void 0" id="${data[i].id}">预览</a></li>-->
+           <!--`-->
+                    <!--)-->
+                <!--}-->
+
+
+                <!--var data={-->
+                    <!--userid:sessionStorage.getItem('userid'),-->
+                    <!--jobid:_job_id,-->
+                    <!--jianliid:data[0].id-->
+                <!--};-->
+                <!--$.ajax({-->
+                    <!--url:'http://localhost:3000/resume/isapply',-->
+                    <!--type:'get',-->
+                    <!--data:data,-->
+                    <!--dataType:'text',-->
+                    <!--success:function (data) {-->
+                        <!--if(data>0){-->
+                            <!--$('#btn_apply').text('简历已投').prop('disabled',true).css({'background':'grey'});-->
+                        <!--}-->
+                    <!--}-->
+                <!--});-->
+
+            <!--}-->
+        <!--});-->
+<!--//        显示职位详情&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+        <!--$('#job_name').text(_job.name);-->
+        <!--var job_date=0;-->
+        <!--var time=new Date(_job.publish_date);-->
+        <!--var date=time.getDate();-->
+        <!--var now_day=new Date().getDate();-->
+        <!--if(date==now_day){-->
+            <!--job_date=time.getHours()+' : '+time.getMinutes()+' 发布';-->
+        <!--}else if(now_day-date<=3) {-->
+            <!--job_date=now_day-date+' 天前 发布'-->
+        <!--}else {-->
+            <!--job_date='3 天前 发布'-->
+        <!--}-->
+        <!--$('#job_info').html(`<span>${_job.salary}</span>/${_job.cityname}/${_job.years_working}/${_job.education}/${_job.job_nature}`);-->
+        <!--$('#job_publish_time').text(job_date);-->
+
+
+        <!--var tags_arr=_job.tags.split(' ');-->
+        <!--var tags='';-->
+        <!--for(var k=0;k<tags_arr.length;k++){-->
+            <!--tags+='<button style="margin-left: 3px">'+tags_arr[k]+'</button>';-->
+        <!--}-->
+
+        <!--$('#job_level').html(tags);-->
+
+        <!--$('.jobinfo_left').html(_job.description);-->
+
+
+<!--//        显示公司信息-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+
+        <!--$('#company_name').text(_job.companyname);-->
+        <!--$('#profession_name').text(_job.professionname);-->
+        <!--$('#company_stage').text(_job.stage);-->
+        <!--$('#company_acount').text(_job.account);-->
+
+
+    <!--};-->
+
+<!--//    点击投递简历按钮-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
+    <!---->
+    <!--$('#btn_apply').click(function () {-->
+        <!--var _name=window.sessionStorage.getItem('loginname');-->
+        <!--if(_name){-->
+            <!--$('#jianli').toggle(100);-->
+        <!--}else {-->
+            <!--alert('您尚未登录');-->
+            <!--sessionStorage.setItem('toUrl','../4-job/job.html');-->
+            <!--location.href='login.html';-->
+
+        <!--}-->
+
+    <!--});-->
+
+    <!--var jianli_id;-->
+    <!--$(document).on('click','[name="radio1"]',function () {-->
+        <!--jianli_id=$(this).prop('value');-->
+        <!--$('#btn').val('确认投递简历').prop('disabled',false).css({'background':'green'})-->
+    <!--});-->
+
+<!--//投递简历-->
+    <!--$('#btn').click(function () {-->
+        <!--var data={-->
+            <!--userid:sessionStorage.getItem('userid'),-->
+            <!--jobid:_job_id,-->
+            <!--jianliid:jianli_id-->
+        <!--};-->
+        <!--$.ajax({-->
+            <!--url:'http://localhost:3000/resume/applyresume',-->
+            <!--type:'get',-->
+            <!--data:data,-->
+            <!--dataType:'text',-->
+            <!--success:function (data) {-->
+                <!--if(data==1){-->
+                    <!--$('#jianli').hide(100);-->
+                    <!--$('#btn_apply').text('简历已投').prop('disabled',true).css({'background':'grey'});-->
+                <!--}-->
+            <!--}-->
+        <!--});-->
+    <!--});-->
+<!--</script>-->

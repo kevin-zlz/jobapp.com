@@ -1,0 +1,152 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #d3d3d3;
+}
+.top{
+    width: 100%;
+    height: 30px;
+    background: black;
+}
+
+.top .login_no,.top .login_yes{
+    height: 30px;
+    width: 200px;
+    position: absolute;
+    right: 10px;
+    line-height: 30px;
+    display: none;
+}
+
+.top .login_yes{
+    display: block;
+    width: 30%;
+}
+.top .login_yes ul li ul li a{
+    visibility: hidden;
+
+}
+.top .login_yes ul li:hover ul li a{
+    visibility: visible;
+    background: black;
+    width: 70px;
+    text-align: center;
+    display: block;
+
+}
+
+
+.top ul li { list-style: none; float: left;}
+.top ul li a{ color: white; text-decoration: none;}
+
+
+
+.nav {
+    width: 100%;
+    height:30px;
+    background-color: #333333;
+}
+
+
+.logo {
+    width: 100%;
+    height:40px;
+    background-color:#ffffff;
+}
+
+.logo ul li  { list-style: none; float: left;  }
+
+.logo ul {  width: 200px; height: 40px;  margin-left: 230px;}
+
+.logo ul li a { display: block; color: #999999; margin-left: 50px; font-size:18px; text-decoration: none; margin-top: 10px; }
+
+*{ margin: 0px; padding: 0px;}
+
+
+
+
+.logo {
+    width: 100%;
+    height:40px;
+    background-color:#FCC;
+}
+
+.logo ul li  { list-style: none; float: left;  }
+
+.logo ul {  width: 200px; height: 40px;  margin-left: 230px;}
+
+.logo ul li a { display: block; color: #999999; margin-left: 50px; font-size:18px; text-decoration: none; margin-top: 10px; }
+
+
+.main { width:80%; height:1200px; background-color: #ffffff; margin: auto}
+
+.main .main_box { width:1000px; height:1200px; margin:auto; }
+
+.main .main_box .main_left { width:702px; height:800px;float: left}
+
+.main .main_box .main_left .main_head { position:relative; left:0px; top:0px;}
+
+.main .main_box .main_left .main_head .imgt{ position:absolute; left:290px; top:45px; }
+
+.main .main_box .main_left .main_head .imgb { position:absolute; z-index:1;}
+
+
+.main .main_box .main_left .main_info { width:300px; height:200px;  position:relative; left:200px; top:200px; font-family:"幼圆";}
+
+.main .main_box .main_left .main_info ul li { list-style-type:none; text-align:center; margin-bottom:10px;}
+
+.main .main_box .main_left .main_info img { position:relative; top:5px;}
+
+.main .main_box .main_left .main_work {width:702px; height:300px;  position:relative; left:0px; top:200px; right:10px; font-family:"幼圆"; }
+
+.main .main_box .main_left .gongzuo { position:relative; left:320px; top:-30px; font-size:18px;}
+
+.main .main_box .main_left .main_work .info { margin-left:50px; margin-bottom:40px;}
+
+.main .main_box .main_left .main_edu {width:702px; height:500px; background-color:#FFC; position:relative; left:0px; top:200px; right:10px; font-family:"幼圆";}
+
+.main .main_box .main_left .main_edu .imgadd { position:relative; left:600px; top:-55px;}
+
+.main .main_box .main_left .main_edu .zhuce { width:550px; height:400px;  margin:auto; display: none}
+
+.main .main_box .main_left .main_edu .zhuce span { color:#333;}
+
+.main .main_box .main_left .main_edu .zhuce p { position:relative; left:20px; top:50px; margin-bottom:30px;}
+
+.main .main_box .main_left .main_edu .zhuce .tx1 { width:300px; height:40px; margin-top:7px;}
+
+.main .main_box .main_left .main_edu .zhuce .s1 { width:150px; height:40px; border:none;}
+
+.main .main_box .main_left .main_edu .zhuce #btn1 { width:60px; height:35px; color:#FFF; background-color:#00b38a; border:none; font-size:14px; }
+
+.main .main_box .main_left .main_edu .zhuce #btn2 { width:60px; height:35px; color:#00b38a; border:none; font-size:14px; }
+
+.main .main_box .main_right { width:298px; height:800px; float: left;padding: 30px;box-sizing: border-box}
+
+.main .main_box .main_right .jianli_liebiao{
+    background: #ececec;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    font-size: 0.8em;
+}
+.main .main_box .main_right .jianli_biaoti{height: 120px; border-left: solid 2px #d2d2d2
+}
+.main .main_box .main_right .jianli_biaoti ul{list-style: none;margin-top: 10px}
+.main .main_box .main_right .jianli_biaoti ul li{
+    width: 100%;
+    height: 60px;
+    padding: 20px;
+    box-sizing: border-box;
+    border-left: solid 2px white;
+    cursor: pointer;
+}
+
+.main .main_box .main_right .jianli_biaoti ul li:first-child{
+
+    border-left: solid 2px #00de00;
+
+}
+
